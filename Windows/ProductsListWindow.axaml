@@ -1,0 +1,37 @@
+<Window xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+  x:Class="Windows.ProductsListWindow"
+  Title="ProductsListWindow">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="8*" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="5*" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+
+    <ListBox x:Name="products_listBox"
+      Width="800"
+      Grid.Row="1" Grid.Column="1"
+      HorizontalAlignment="Center"
+      VerticalAlignment="Center">
+    </ListBox>
+
+    <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal"
+    HorizontalAlignment="Center" VerticalAlignment="Center">
+      <Button Content="Добавить" Margin="15" Click="addButton_Click"/>
+      <Button Content="Изменить" Margin="15" Click="editButton_Click"/>
+      <Button Content="Удалить" Margin="15" Click="deleteButton_Click"/>
+      <Button Name="createPDF" Click="createPDF_Click">Создать PDF</Button>
+    </StackPanel>
+
+  </Grid>
+</Window>
