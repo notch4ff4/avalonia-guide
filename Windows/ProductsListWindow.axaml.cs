@@ -21,34 +21,42 @@ public partial class ProductsListWindow : Window
         LoadData();
     }
 
-    public void addButton_Click(object sender, RoutedEventArgs e) {
+    public void addButton_Click(object sender, RoutedEventArgs e)
+    {
         ProductViewWindow pvw = new ProductViewWindow();
-        pvw.Closed += (sender, e) => {
-                this.Show();
-                LoadData();
-            };
+        pvw.Closed += (sender, e) =>
+        {
+            this.Show();
+            LoadData();
+        };
         this.Hide();
         pvw.Show();
     }
 
-    public void editButton_Click(object sender, RoutedEventArgs e) {
+    public void editButton_Click(object sender, RoutedEventArgs e)
+    {
         StackPanel si = products_listBox.SelectedItem as StackPanel;
         int id = int.Parse(si.Name);
         ProductViewWindow pvw = new ProductViewWindow(id);
-        pvw.Closed += (sender, e) => {
-                this.Show();
-                LoadData();
-            };
+        pvw.Closed += (sender, e) =>
+        {
+            this.Show();
+            LoadData();
+        };
         this.Hide();
         pvw.Show();
     }
 
-    public void deleteButton_Click(object sender, RoutedEventArgs e) {
+    public void deleteButton_Click(object sender, RoutedEventArgs e)
+    {
         StackPanel si = products_listBox.SelectedItem as StackPanel;
-        int id = int.Parse(si.Name);
-        context.Products.Where(p => p.Id == id).ExecuteDelete();
-        context.SaveChanges();
-        LoadData();
+        if (si != null)
+        {
+            int id = int.Parse(si.Name);
+            context.Products.Where(p => p.Id == id).ExecuteDelete();
+            context.SaveChanges();
+            LoadData();
+        }
     }
 
     public void createPDF_Click(object sender, RoutedEventArgs e)
@@ -136,14 +144,16 @@ public partial class ProductsListWindow : Window
         }
     }
 
-    private void LoadData() {
+    private void LoadData()
+    {
         products_listBox.ItemsSource = null;
 
         context.ChangeTracker.Clear();
 
         List<Product> products = context.Products.Include(p => p.CategoryNavigation).ToList();
         List<StackPanel> list = new List<StackPanel>();
-        foreach(var p in products) {
+        foreach (var p in products)
+        {
             StackPanel sp = new StackPanel();
             sp.Name = p.Id.ToString();
             TextBlock tb = new TextBlock();
